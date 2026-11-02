@@ -1,0 +1,14 @@
+<script setup lang="ts">
+withDefaults(
+  defineProps<{
+    size?: number | string
+  }>(),
+  {
+    size: 20,
+  },
+)
+</script>
+
+<template>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" :height="size" :width="size" fill="currentColor"><path d="M11,13H5V11h6V5h2v6h6v2H13v6H11V13Z"/></svg>
+</template>
