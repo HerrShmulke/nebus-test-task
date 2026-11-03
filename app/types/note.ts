@@ -16,3 +16,11 @@ export interface NotesStorage {
   version: number
   notes: Note[]
 }
+
+export interface NoteDraft {
+  version: number
+  noteId: string
+  baseUpdatedAt: string
+  savedAt: string
+  note: Note
+}
