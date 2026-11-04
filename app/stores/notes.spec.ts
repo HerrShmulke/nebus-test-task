@@ -3,12 +3,11 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 import type { Note, NotesStorage } from '../types/note'
 import { useNotesStore } from './notes'
+import { STORAGE_KEY } from '../constants/storage'
 
 vi.mock('~/utils/id', () => ({
   createId: () => 'generated-id',
 }))
-
-const STORAGE_KEY = 'notes-app:data'
 
 function createNote(overrides: Partial<Note> = {}): Note {
   return {

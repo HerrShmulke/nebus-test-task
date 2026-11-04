@@ -1,8 +1,7 @@
 import { useNotesStore } from '../stores/notes'
 import { useConfirm } from '../composables/useConfirm'
 import { storeToRefs } from 'pinia'
-
-const STORAGE_KEY = 'notes-app:data'
+import { STORAGE_KEY } from '../constants/storage'
 
 export function useHomePage() {
   const store = useNotesStore()

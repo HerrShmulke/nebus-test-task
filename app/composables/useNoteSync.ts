@@ -1,7 +1,6 @@
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useNotesStore } from '../stores/notes'
-
-const STORAGE_KEY = 'notes-app:data'
+import { STORAGE_KEY } from '../constants/storage'
 
 export function useNoteSync(noteId: string) {
   const store = useNotesStore()

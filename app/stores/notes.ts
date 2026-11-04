@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 import type { Note, NotesStorage } from '../types/note'
 import { createId } from '../utils/id'
+import { STORAGE_KEY } from '../constants/storage'
 
-const STORAGE_KEY = 'notes-app:data'
 const STORAGE_VERSION = 1
 
 function isNote(value: unknown): value is Note {
