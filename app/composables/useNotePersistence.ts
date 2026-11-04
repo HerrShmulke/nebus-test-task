@@ -1,40 +1,50 @@
+import { isNoteDraft } from '~/utils/validation/note-draft'
 import type { Note, NoteDraft } from '../types/note'
 
-const DRAFT_PREFIX = 'notes-app:draft:'
+const DRAFT_KEY_PREFIX = 'notes-app:draft:'
+const DRAFT_VERSION = 1
+
+function getDraftKey(noteId: string): string {
+  return `${DRAFT_KEY_PREFIX}${noteId}`
+}
+
+function parseJson(raw: string): unknown {
+  try {
+    return JSON.parse(raw)
+  } catch {
+    return null
+  }
+}
 
 export function useNotePersistence() {
   function saveDraft(note: Note, baseUpdatedAt: string) {
     if (import.meta.server) return
+
     const draft: NoteDraft = {
-      version: 1,
+      version: DRAFT_VERSION,
       noteId: note.id,
       baseUpdatedAt,
       savedAt: new Date().toISOString(),
       note,
     }
-    localStorage.setItem(`${DRAFT_PREFIX}${note.id}`, JSON.stringify(draft))
+
+    localStorage.setItem(getDraftKey(note.id), JSON.stringify(draft))
   }
 
   function readDraft(noteId: string): NoteDraft | null {
     if (import.meta.server) return null
-    const raw = localStorage.getItem(`${DRAFT_PREFIX}${noteId}`)
+
+    const raw = localStorage.getItem(getDraftKey(noteId))
     if (!raw) return null
 
-    try {
-      const parsed: unknown = JSON.parse(raw)
-      if (!parsed || typeof parsed !== 'object') return null
-      const draft = parsed as Partial<NoteDraft>
-      if (draft.version !== 1 || draft.noteId !== noteId || !draft.note
-        || draft.note.id !== noteId || !Array.isArray(draft.note.todos)) return null
-      return draft as NoteDraft
-    } catch {
-      return null
-    }
+    const parsed = parseJson(raw)
+    return isNoteDraft(parsed) ? parsed : null
   }
 
   function removeDraft(noteId: string) {
     if (import.meta.server) return
-    localStorage.removeItem(`${DRAFT_PREFIX}${noteId}`)
+
+    localStorage.removeItem(getDraftKey(noteId))
   }
 
   return { saveDraft, readDraft, removeDraft }

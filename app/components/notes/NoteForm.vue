@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { createId } from '../../utils/id';
 import type { Note, TodoItem } from '../../types/note';
+import IconUndo from '../ui/icons/IconUndo.vue';
+import IconRedo from '../ui/icons/IconRedo.vue';
+import VButton from '../ui/VButton.vue';
+import TodoList from './TodoList.vue';
+import IconPlus from '../ui/icons/IconPlus.vue';
 
 defineProps<{
   note: Note

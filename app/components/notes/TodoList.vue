@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { TodoItem as Todo } from '../../types/note'
+import TodoItem from './TodoItem.vue';
 
 const props = withDefaults(defineProps<{
   todos: Todo[]
