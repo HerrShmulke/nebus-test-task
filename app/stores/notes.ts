@@ -1,23 +1,10 @@
 import { defineStore } from 'pinia'
 import type { Note, NotesStorage } from '../types/note'
 import { createId } from '../utils/id'
+import { isNote } from '../utils/validation/note'
 import { STORAGE_KEY } from '../constants/storage'
 
 const STORAGE_VERSION = 1
-
-function isNote(value: unknown): value is Note {
-  if (!value || typeof value !== 'object') return false
-  const note = value as Partial<Note>
-  return typeof note.id === 'string'
-    && typeof note.title === 'string'
-    && Array.isArray(note.todos)
-    && typeof note.createdAt === 'string'
-    && typeof note.updatedAt === 'string'
-    && note.todos.every(todo => todo
-      && typeof todo.id === 'string'
-      && typeof todo.text === 'string'
-      && typeof todo.completed === 'boolean')
-}
 
 function parseStorage(raw: string | null): Note[] {
   if (!raw) return []
