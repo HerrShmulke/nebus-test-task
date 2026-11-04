@@ -19,7 +19,7 @@ function parseStorage(raw: string | null): Note[] {
   }
 }
 
-export const useNotesStore = defineStore('a', () => {
+export const useNotesStore = defineStore('notes', () => {
   const notes = ref<Note[]>([])
   const isInitialized = ref(false)
 
