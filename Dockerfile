@@ -15,7 +15,7 @@ FROM node:24-alpine AS runner
 
 WORKDIR /app
 
-ENV NODE_ENV=production
+ENV NODE_ENV=dev
 ENV NITRO_HOST=0.0.0.0
 ENV NITRO_PORT=3000
 

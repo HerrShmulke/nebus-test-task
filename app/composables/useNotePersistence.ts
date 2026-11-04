@@ -1,4 +1,4 @@
-import { isNoteDraft } from '~/utils/validation/note-draft'
+import { isNoteDraft } from '../utils/validation/note-draft'
 import type { Note, NoteDraft } from '../types/note'
 
 const DRAFT_KEY_PREFIX = 'notes-app:draft:'

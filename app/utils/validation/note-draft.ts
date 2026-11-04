@@ -1,5 +1,6 @@
 import z from "zod";
 import { NOTE_SCHEMA } from "./note";
+import type { NoteDraft } from '../../types/note'
 
 export const NOTE_DRAFT_SCHEMA = z.object({
   version: z.number(),
