@@ -13,13 +13,17 @@ const {
   createNote,
   removeNote
 } = useHomePage()
+
+function openNote(noteId: string) {
+  navigateTo(`/notes/${noteId}`)
+}
 </script>
 
 <template>
   <main class="page-shell">
     <TheHeader />
 
-    <HomePageContent :notes="notes" @create-note="createNote" @remove-note="removeNote" />
+    <HomePageContent :notes="notes" @create-note="createNote" @remove-note="removeNote" @open-note="openNote" />
 
     <VModal
       :open="Boolean(dialog)"

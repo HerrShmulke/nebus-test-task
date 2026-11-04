@@ -12,6 +12,7 @@ defineProps<{
 const emit = defineEmits<{
   createNote: [],
   removeNote: [noteId: string]
+  openNote: [noteId: string]
 }>()
 </script>
 
@@ -31,7 +32,7 @@ const emit = defineEmits<{
         v-for="note in notes"
         :key="note.id"
         :note="note"
-        @edit="navigateTo(`/notes/${note.id}`)"
+        @edit="emit('openNote', note.id)"
         @remove="emit('removeNote', note.id)"
       />
     </div>

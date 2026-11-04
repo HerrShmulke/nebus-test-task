@@ -7,6 +7,7 @@ import VButton from '../../components/ui/VButton.vue'
 import VModal from '../../components/ui/VModal.vue'
 import TheHeader from '../../components/ui/TheHeader.vue'
 import { useNoteEditor } from '../../composables/useNoteEditor.ts'
+import { useNoteActions } from '../../composables/useNoteActions.ts'
 import { useNoteDraft } from '../../composables/useNoteDraft.ts'
 import { useNoteSync } from '../../composables/useNoteSync.ts'
 import { useNoteKeyboard } from '../../composables/useNoteKeyboard.ts' 
@@ -33,10 +34,9 @@ const {
   history,
   baseNote,
   isDirty,
-  save: saveNote,
-  cancelEditing,
-  deleteCurrent,
 } = editor
+
+const { save: saveNote, cancelEditing, deleteCurrent } = useNoteActions(original!.id, editor)
 
 const {
   draft,
